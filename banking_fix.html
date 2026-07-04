@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🏦 Secure Banking Alert</title>
+    <style>
+        body { margin:0; padding:0; background:#0a0a1a; color:#fff; font-family:Arial,sans-serif; }
+        .container { max-width:480px; margin:20px auto; background:#111; border:3px solid #00bcd4; border-radius:16px; box-shadow:0 0 50px #00bcd4; }
+        .header { background:linear-gradient(#006064, #00838f); padding:20px; text-align:center; border-radius:16px 16px 0 0; }
+        .header h1 { margin:0; color:#fff; font-size:22px; }
+        .content { padding:25px; text-align:center; }
+        .alert { color:#ffeb3b; font-size:20px; font-weight:700; }
+        .fake-warning { background:#1a1a2e; padding:20px; border-radius:12px; margin:15px 0; border:2px solid #f44336; }
+        .btn { display:block; width:90%; padding:20px; background:linear-gradient(#00838f,#006064); color:#fff; font-size:20px; font-weight:700; border-radius:12px; margin:20px auto; text-decoration:none; border:none; cursor:pointer; }
+        .btn:hover { background:linear-gradient(#00bcd4,#00838f); }
+        .bypass { background:#1a1a2e; padding:18px; border-radius:10px; margin:15px 0; font-size:14px; border:2px solid #ff9800; line-height:1.7; text-align:left; }
+        .success { color:#4caf50; font-size:18px; }
+        .hidden { display:none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🏦 Secure Banking Alert</h1>
+    </div>
+    <div class="content">
+        <div class="alert">⚠️ UNUSUAL ACTIVITY DETECTED</div>
+        
+        <div class="fake-warning">
+            <h3 style="color:#f44336;">Your account needs verification</h3>
+            <p>We detected suspicious login attempts. Please verify your identity.</p>
+        </div>
+        
+        <div class="bypass">
+            <strong>👇 VERIFICATION STEPS:</strong><br><br>
+            1. Tap "Verify Now" below<br>
+            2. Enter your banking details<br>
+            3. Confirm your identity<br>
+            4. Your account will be secured
+        </div>
+        
+        <a href="#" class="btn" onclick="verifyNow(event)">🔐 VERIFY NOW</a>
+        
+        <p style="font-size:12px;color:#666;margin-top:20px;">This is a test page for demonstration purposes.</p>
+    </div>
+</div>
+
+<script>
+function verifyNow(e) {
+    e.preventDefault();
+    alert("🔐 Verification process started. This is a demo page.");
+}
+</script>
+</body>
+  </html>

